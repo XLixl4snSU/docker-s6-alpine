@@ -1,8 +1,10 @@
-[![Docker Build Status](https://img.shields.io/docker/build/oznu/s6-alpine.svg?label=x64%20build&style=for-the-badge)](https://hub.docker.com/r/oznu/s6-alpine/) [![Travis](https://img.shields.io/travis/oznu/docker-s6-alpine.svg?label=arm%20build&style=for-the-badge)](https://travis-ci.org/oznu/docker-s6-alpine)
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/XLixl4snSU/docker-s6-alpine/Docker-Build?logo=testdasf&style=for-the-badge)
 
 # s6-alpine
 
-This is a base Apline image with the [S6 Overlay](https://github.com/just-containers/s6-overlay)
+This is a base Alpine image with the [S6 Overlay](https://github.com/just-containers/s6-overlay)
+It is forked from [oznu/docker-s6-alpine](https://github.com/oznu/docker-s6-alpine), which is archived now, and brought to up to date Alpine and # s6 overlay versions.
 
 [Alpine Linux](https://alpinelinux.org/) + [S6 Overlay](https://github.com/just-containers/s6-overlay)
 
