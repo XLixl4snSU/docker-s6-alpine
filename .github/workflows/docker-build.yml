@@ -16,7 +16,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: docker.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: butti/docker-s6-alpine
+  IMAGE_NAME: butti/s6-alpine
 
 jobs:
   build:
