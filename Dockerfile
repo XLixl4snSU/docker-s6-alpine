@@ -1,19 +1,14 @@
-ARG BASE_IMAGE
-FROM ${BASE_IMAGE:-library/alpine}:3.13
-
-ARG QEMU_ARCH
-ENV QEMU_ARCH=${QEMU_ARCH:-x86_64} S6_KEEP_ENV=1
-
-COPY qemu/qemu-${QEMU_ARCH}-static /usr/bin/
-
-RUN set -x && apk add --no-cache curl coreutils tzdata shadow \
-  && case "${QEMU_ARCH}" in \
-    x86_64) S6_ARCH='amd64';; \
-    arm) S6_ARCH='armhf';; \
-    aarch64) S6_ARCH='aarch64';; \
-    *) echo "unsupported architecture"; exit 1 ;; \
-  esac \
-  && curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v1.22.1.0/s6-overlay-${S6_ARCH}.tar.gz | tar xvzf - -C / \
+FROM alpine:3.16.2
+ARG TARGETPLATFORM
+RUN case ${TARGETPLATFORM} in \
+         "linux/amd64")  ARCH=x86_64  ;; \
+         "linux/arm64")  ARCH=aarch64  ;; \
+         "linux/arm/v7") ARCH=armhf  ;; \
+         "") ARCH=x86_64  ;; \
+    esac \
+  && set -x && apk add --no-cache curl coreutils tzdata shadow xz \
+  && curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v3.1.2.1/s6-overlay-noarch.tar.xz | tar Jxpf - -C / \
+  && curl -L -s https://github.com/just-containers/s6-overlay/releases/download/v3.1.2.1/s6-overlay-$ARCH.tar.xz | tar Jxpf - -C / \
   && groupmod -g 911 users && \
   useradd -u 911 -U -d /config -s /bin/false abc && \
   usermod -G users abc && \
